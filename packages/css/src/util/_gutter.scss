@@ -1,0 +1,115 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+$-negative-gutters: map-negativify(config.$gutters);
+
+$-gutter-utilities: (
+	(
+		property: margin,
+		class: m,
+		values: map-merge(config.$gutters, (auto: auto))
+	),
+	(
+		property: margin-left margin-right,
+		class: mx,
+		values: map-merge(config.$gutters, (auto: auto))
+	),
+	(
+		property: margin-top margin-bottom,
+		class: my,
+		values: map-merge(config.$gutters, (auto: auto))
+	),
+	(
+		property: margin-top,
+		class: mt,
+		values: map-merge(config.$gutters, (auto: auto))
+	),
+	(
+		property: margin-left,
+		class: ml,
+		values: map-merge(config.$gutters, (auto: auto))
+	),
+	(
+		property: margin-right,
+		class: mr,
+		values: map-merge(config.$gutters, (auto: auto))
+	),
+	(
+		property: margin-bottom,
+		class: mb,
+		values: map-merge(config.$gutters, (auto: auto))
+	),
+	(
+		property: margin,
+		class: -m,
+		values: $-negative-gutters
+	),
+	(
+		property: margin-left margin-right,
+		class: -mx,
+		values: $-negative-gutters
+	),
+	(
+		property: margin-top margin-bottom,
+		class: -my,
+		values: $-negative-gutters
+	),
+	(
+		property: margin-top,
+		class: -mt,
+		values: $-negative-gutters
+	),
+	(
+		property: margin-left,
+		class: -ml,
+		values: $-negative-gutters
+	),
+	(
+		property: margin-right,
+		class: -mr,
+		values: $-negative-gutters
+	),
+	(
+		property: margin-bottom,
+		class: -mb,
+		values: $-negative-gutters
+	),
+	(
+		property: padding,
+		class: p,
+		values: config.$gutters
+	),
+	(
+		property: padding-left padding-right,
+		class: px,
+		values: config.$gutters
+	),
+	(
+		property: padding-top padding-bottom,
+		class: py,
+		values: config.$gutters
+	),
+	(
+		property: padding-top,
+		class: pt,
+		values: config.$gutters
+	),
+	(
+		property: padding-left,
+		class: pl,
+		values: config.$gutters
+	),
+	(
+		property: padding-right,
+		class: pr,
+		values: config.$gutters
+	),
+	(
+		property: padding-bottom,
+		class: pb,
+		values: config.$gutters
+	),
+);
+
+@include utility-make-utilities($-gutter-utilities);

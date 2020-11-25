@@ -1,0 +1,156 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.emoji-picker-popup
+{
+	height: 450px;
+	width: 390px;
+
+	@include responsive-down(sm)
+	{
+		height: 300px;
+		width: 330px;
+	}
+}
+
+.emoji-picker
+{
+	position: relative;
+	display: flex;
+	flex-flow: column;
+	z-index: 0;
+
+	&-categories,
+	&-footer
+	{
+		position: sticky;
+		display: flex;
+		bottom: 0;
+		background: #{color-layered(base-light, outline, .25)};
+		z-index: 1;
+	}
+
+	button
+	{
+		background: transparent;
+		border: 0;
+		border-radius: #{config.$radius};
+		cursor: pointer;
+		outline: 0;
+	}
+
+	&-categories
+	{
+		top: 0;
+		padding: 0 #{gutter-get(2)};
+		justify-content: center;
+		border-bottom: 1px solid #{color-no-variable(outline)};
+	}
+
+	&-categories &-category
+	{
+		display: flex;
+		padding: #{gutter-get(4)} #{gutter-get(2)};
+		align-items: center;
+		flex: 1 1 0;
+		justify-content: center;
+
+		&::after
+		{
+			margin: 0 #{gutter-get(2)};
+		}
+
+		img
+		{
+			height: 21px;
+			opacity: .75;
+		}
+
+		@include responsive-down(sm)
+		{
+			img
+			{
+				height: 18px;
+			}
+		}
+	}
+
+	&-footer
+	{
+		bottom: 0;
+		padding: #{gutter-get(2)};
+		border-top: 1px solid #{color-no-variable(outline)};
+	}
+
+	&-items
+	{
+		display: grid;
+		padding: #{gutter-get(2)};
+		grid-template-columns: repeat(9, 1fr);
+	}
+
+	&-items &-item
+	{
+		height: 42px;
+		padding: 0;
+
+		@include state-hover
+		{
+			background: #{color-no-variable(outline, .25)};
+		}
+	}
+
+	&-skin-tone
+	{
+		display: flex;
+		margin: 1px 0 1px #{gutter-get(2)};
+		padding: #{gutter-get(2)};
+		align-items: center;
+		justify-content: center;
+		background: rgba(0, 0, 0, .1);
+
+		@include state-hover
+		{
+			background: #{color-no-variable(outline, .25)};
+		}
+	}
+
+	.skin-tone
+	{
+		display: block;
+		height: 24px;
+		width: 24px;
+		border-radius: 12px;
+
+		&.tone-0
+		{
+			background: rgb(255, 207, 17);
+		}
+
+		&.tone-1
+		{
+			background: rgb(250, 227, 195);
+		}
+
+		&.tone-2
+		{
+			background: rgb(226, 207, 161);
+		}
+
+		&.tone-3
+		{
+			background: rgb(219, 163, 115);
+		}
+
+		&.tone-4
+		{
+			background: rgb(168, 128, 84);
+		}
+
+		&.tone-5
+		{
+			background: rgb(95, 78, 67);
+		}
+	}
+}

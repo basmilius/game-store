@@ -1,0 +1,247 @@
+@use "../config";
+@use "../function" as *;
+
+@mixin dark-mode($atRoot: false)
+{
+	@if config.$dark-mode == enabled
+	{
+		@if $atRoot == true
+		{
+			:root
+			{
+				@content;
+			}
+		} @else
+		{
+			@content;
+		}
+	} @else if config.$dark-mode == auto
+	{
+		@media (prefers-color-scheme: dark)
+		{
+			@content;
+		}
+	} @else if config.$dark-mode == data-attribute
+	{
+		@at-root html[data-theme="dark"] #{&}
+		{
+			@content;
+		}
+
+		@at-root html[data-theme="auto"] #{&}
+		{
+			@media (prefers-color-scheme: dark)
+			{
+				@content;
+			}
+		}
+	}
+}
+
+@mixin light-mode($atRoot: false)
+{
+	@if config.$dark-mode == disabled
+	{
+		@if $atRoot == true
+		{
+			:root
+			{
+				@content;
+			}
+		} @else
+		{
+			@content;
+		}
+	} @else if config.$dark-mode == auto
+	{
+		@media (prefers-color-scheme: light)
+		{
+			@content;
+		}
+	} @else if config.$dark-mode == data-attribute
+	{
+		@at-root html[data-theme="light"] #{&}
+		{
+			@content;
+		}
+
+		@at-root html[data-theme="auto"] #{&}
+		{
+			@media (prefers-color-scheme: light)
+			{
+				@content;
+			}
+		}
+	}
+}
+
+@mixin focus-ring($name: background)
+{
+	box-shadow: 0 0 0 3px color-no-variable(#{$name}, .2);
+}
+
+@mixin active
+{
+	@if config.$enable-hover-focus-active
+	{
+		&:active,
+		&.is-active
+		{
+			@content;
+		}
+	}
+}
+
+@mixin active-hover
+{
+	@if config.$enable-hover-focus-active
+	{
+		&:active,
+		&.is-active,
+		&:hover,
+		&.is-hover
+		{
+			@content;
+		}
+	}
+}
+
+@mixin active-not
+{
+	@if config.$enable-hover-focus-active
+	{
+		&:not(:active):not(.is-active)
+		{
+			@content;
+		}
+	}
+}
+
+@mixin disabled($root: false)
+{
+	@if $root == true
+	{
+		[disabled],
+		.is-disabled
+		{
+			@content;
+		}
+	} @else
+	{
+		&[disabled],
+		&.is-disabled
+		{
+			@content;
+		}
+	}
+}
+
+@mixin focus
+{
+	@if config.$enable-hover-focus-active
+	{
+		@if config.$enable-focus-state
+		{
+			&:focus,
+			&.is-focus
+			{
+				@content;
+			}
+		}
+	}
+}
+
+@mixin focus-visible
+{
+	@if config.$enable-hover-focus-active
+	{
+		@if config.$enable-focus-state
+		{
+			&:focus-visible,
+			&.is-focus
+			{
+				@content;
+			}
+		}
+	}
+}
+
+@mixin focus-within
+{
+	@if config.$enable-hover-focus-active
+	{
+		@if config.$enable-focus-state
+		{
+			&:focus,
+			&:focus-within,
+			&.is-focus
+			{
+				@content;
+			}
+		}
+	}
+}
+
+@mixin hover
+{
+	@if config.$enable-hover-focus-active
+	{
+		&:hover,
+		&.is-hover
+		{
+			@content;
+		}
+	}
+}
+
+@mixin hover-focus
+{
+	@if config.$enable-hover-focus-active
+	{
+		@if config.$enable-focus-state
+		{
+			&:focus,
+			&.is-focus,
+			&:hover,
+			&.is-hover
+			{
+				@content;
+			}
+		} @else
+		{
+			&:hover,
+			&.is-hover
+			{
+				@content;
+			}
+		}
+	}
+}
+
+@mixin hover-focus-visible
+{
+	@if config.$enable-hover-focus-active
+	{
+		@if config.$enable-focus-state
+		{
+			&.is-focus,
+			&:hover,
+			&.is-hover
+			{
+				@content;
+			}
+
+			&:focus-visible
+			{
+				@content;
+			}
+		} @else
+		{
+			&:hover,
+			&.is-hover
+			{
+				@content;
+			}
+		}
+	}
+}

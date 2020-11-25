@@ -1,0 +1,35 @@
+@use "../function" as *;
+@use "../mixin" as *;
+
+.close
+{
+	position: relative;
+	display: block;
+	height: 1em;
+	width: 1em;
+	background: #{color-no-variable(background, .2)};
+	border: 0;
+	border-radius: 1em;
+	cursor: pointer;
+	font-size: 24px;
+	outline: 0;
+	transition: background 120ms var(--swiftOut);
+
+	&::before
+	{
+		position: absolute;
+		display: block;
+		top: 0;
+		left: 0;
+		height: 1em;
+		width: 1em;
+		content: "";
+		background: #{color-no-variable(background, .7)};
+		mask: url(~@latte-ui/css/src/image/close-icon.svg) no-repeat center center / .42em;
+	}
+
+	@include state-hover
+	{
+		background: #{color-no-variable(background, .15)};
+	}
+}

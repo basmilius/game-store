@@ -1,0 +1,15 @@
+@use "sass:map";
+@use "../config";
+@use "../function" as *;
+
+@each $color in map.keys(config.$colors)
+{
+	.is-#{$color}
+	{
+		--background: var(--#{$color}) !important;
+		--background-l: var(--#{$color}-l) !important;
+
+		--color: var(--#{$color}-on) !important;
+		--color-l: var(--#{$color}-on-l) !important;
+	}
+}

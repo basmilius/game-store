@@ -1,0 +1,183 @@
+@use "../config";
+@use "../grid/grid";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.form-control
+{
+	@include form-base-form-element;
+
+	padding: #{gutter-get(2)} #{gutter-get(4)};
+	width: 100%;
+	background: hsl(#{color-compose-variable(outline, unquote("var(--variant-lighter)"))});
+	border: 1px solid hsl(#{color-compose-variable(outline)});
+	border-radius: #{config.$radius};
+	color: #{color-no-variable(base-dark)};
+	transition-property: background, border-color, box-shadow;
+
+	&::placeholder
+	{
+		color: inherit;
+		opacity: .5;
+	}
+
+	[type="date"],
+	[type="datetime-local"],
+	[type="time"]
+	{
+		padding: #{gutter-get(2) - 1} #{gutter-get(4)};
+
+		&::-webkit-inner-spin-button,
+		&::-webkit-calendar-picker-indicator
+		{
+			display: none;
+			-webkit-appearance: none;
+		}
+	}
+
+	@include state-focus-within
+	{
+		@include state-focus-ring(background);
+
+		border-color: #{color-no-variable(background)};
+	}
+
+	@include state-disabled
+	{
+		background-color: #{color-no-variable(outline, .6)};
+	}
+
+	@at-root select#{&}
+	{
+		appearance: none;
+
+		@include form-base-form-select;
+	}
+
+	&.is-select
+	{
+		@include form-base-form-select;
+	}
+}
+
+.form-extra
+{
+	display: block;
+}
+
+.form-label
+{
+	display: inline-block;
+}
+
+.form-group
+{
+	@extend .row;
+	@extend .no-gutter;
+
+	align-items: flex-start;
+	flex-flow: column;
+
+	.form-extra
+	{
+		margin-top: #{gutter-get(1)};
+	}
+
+	.form-label
+	{
+		margin-bottom: #{gutter-get(1)};
+	}
+
+	@each $breakpoint in map-keys(config.$breakpoints)
+	{
+		@include responsive-up($breakpoint)
+		{
+			&.#{responsive-prefix($breakpoint, flex-row)}
+			{
+				.form-label
+				{
+					margin-top: #{gutter-get(2) + 1px};
+					margin-bottom: #{gutter-get(2) + 1px};
+				}
+
+				.form-check,
+				.form-radio,
+				.form-toggle
+				{
+					margin-top: #{gutter-get(2) + 1px};
+					margin-bottom: #{gutter-get(2) + 1px};
+				}
+			}
+		}
+	}
+}
+
+.form-height
+{
+	min-height: 42px;
+}
+
+.input-group
+{
+	@extend .form-control;
+
+	position: relative;
+	display: flex;
+	padding: 0;
+
+	&-addon
+	{
+		padding: #{gutter-get(1) - 1px};
+
+		> #{config.$icon-selector}
+		{
+			margin: 4px;
+			font-size: 24px;
+		}
+
+		> .btn
+		{
+			margin: -2px;
+		}
+
+		> .form-label
+		{
+			margin: 4px;
+		}
+
+		> .form-check,
+		> .form-radio,
+		> .form-toggle
+		{
+			margin: 4px;
+
+			--background: inherit;
+			--background-l: inherit;
+			--color: inherit;
+			--color-l: inherit;
+		}
+	}
+
+	> .form-control
+	{
+		flex: 1 1 0;
+		background: unset;
+		border: 0;
+		box-shadow: none;
+	}
+
+	> textarea.form-control
+	{
+		flex-basis: auto;
+	}
+
+	> .badge
+	{
+		margin: #{gutter-get(1)};
+
+		+ .badge
+		{
+			margin-left: 0;
+		}
+	}
+}

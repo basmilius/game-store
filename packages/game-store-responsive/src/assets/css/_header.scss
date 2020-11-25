@@ -1,0 +1,75 @@
+@use "~@latte-ui/css" as *;
+
+#main-header
+{
+	@include color-takeover(background, base-light);
+	@include color-takeover(color, base-light-on);
+
+	&-nav .nav-link
+	{
+		margin: 0 #{gutter-get(4)};
+		padding: #{gutter-get(1)} 0;
+		background: transparent;
+		box-shadow: 0 3px transparent;
+		color: #{color-no-variable(base-dark, .7)};
+		font-weight: 500;
+		text-transform: uppercase;
+		transition: all 180ms var(--swiftOut);
+
+		&:hover
+		{
+			color: #{color-no-variable(base-dark)};
+		}
+
+		&.is-active
+		{
+			box-shadow: 0 3px #{color-no-variable(primary)};
+			color: #{color-no-variable(base-dark)};
+		}
+	}
+}
+
+body.is-game #main-header.bg-transparent
+{
+	.gs-logo
+	{
+		color: white;
+	}
+
+	.nav-link
+	{
+		color: rgba(255, 255, 255, .7);
+
+		&:hover
+		{
+			color: white;
+		}
+	}
+}
+
+#header-photo
+{
+	position: relative;
+	height: 100vh;
+	max-height: 720px;
+	margin-top: -90px;
+
+	@include responsive-down(md)
+	{
+		margin-top: -115px;
+	}
+
+	img
+	{
+		position: absolute;
+		display: block;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+}

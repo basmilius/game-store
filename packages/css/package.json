@@ -1,0 +1,6 @@
+{
+	"name": "@latte-ui/css",
+	"version": "2.0.0-dev",
+	"sass": "src/index.scss",
+	"scripts": {}
+}

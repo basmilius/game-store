@@ -1,0 +1,19 @@
+@use "../config";
+@use "../function" as *;
+
+@forward "reboot";
+@forward "root";
+@forward "preflight";
+@forward "typography";
+
+html
+{
+	font-family: #{config.$font-family};
+	font-size: 15px;
+}
+
+body
+{
+	background: var(--bg);
+	color: var(--fg)
+}

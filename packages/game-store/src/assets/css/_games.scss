@@ -1,0 +1,53 @@
+@use "~@latte-ui/css" as *;
+
+.game-hero
+{
+	&-gta-v
+	{
+		background-image: url(../image/games/gta-v/hero.jpg);
+	}
+
+	&-minecraft
+	{
+		background-image: url(../image/games/minecraft/hero.jpg);
+	}
+
+	&-minecraft-dungeons
+	{
+		background-image: url(../image/games/minecraft-dungeons/hero.jpg);
+	}
+}
+
+.game-swiper
+{
+	&-item
+	{
+		.panel-media
+		{
+			border-radius: #{$radius * 2};
+		}
+	}
+
+	&-item &-box
+	{
+		margin: -72px 30px 1px;
+		border-radius: #{$radius};
+		transition: 600ms var(--swiftOut) 150ms;
+		transition-property: opacity, transform;
+
+		&:not(.is-current)
+		{
+			opacity: 0;
+			transform: translate3d(0, 50%, 0);
+		}
+
+		img
+		{
+			margin-top: -90px;
+			height: 180px;
+			width: 120px;
+			border-radius: #{$radius / 2};
+			box-shadow: 0 0 3px rgba(black, .3);
+		}
+	}
+}

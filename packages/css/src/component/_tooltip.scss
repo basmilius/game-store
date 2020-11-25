@@ -1,0 +1,33 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.tooltip
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	max-width: 360px;
+	padding: #{gutter-get(2)} #{gutter-get(4)};
+	background: rgb(var(--shadow));
+	border-radius: #{config.$radius};
+	color: #{color-no-variable-on(dark)};
+	pointer-events: none;
+	transition: opacity 180ms var(--swiftOut);
+	z-index: 2147483647;
+
+	&.is-hidden
+	{
+		opacity: 0;
+	}
+
+	.arrow
+	{
+		--position: calc(50% - var(--p, 0px));
+
+		&::before
+		{
+			background: rgb(var(--shadow));
+		}
+	}
+}

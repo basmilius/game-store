@@ -1,0 +1,157 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.btn
+{
+	position: relative;
+	display: inline-flex;
+	padding: #{gutter-get(2) - 1px} #{gutter-get(5) - 1px};
+	align-items: center;
+	justify-content: center;
+	border: 1px solid transparent;
+	border-radius: #{config.$radius};
+	font-weight: 700;
+	line-height: 24px;
+	outline: 0;
+	text-align: center;
+	text-decoration: none;
+	transition: 120ms var(--swiftOut);
+	transition-property: background, border, box-shadow, color;
+	vertical-align: middle;
+
+	@include state-focus-visible
+	{
+		@include state-focus-ring;
+	}
+
+	> * + *
+	{
+		margin-left: #{gutter-get(3)};
+	}
+
+	#{config.$icon-selector},
+	.avatar,
+	.spinner
+	{
+		font-size: 24px;
+	}
+
+	&.is-fluid
+	{
+		display: flex;
+		width: 100%;
+		flex: 1 1 auto;
+	}
+
+	&.is-small
+	{
+		padding: #{gutter-get(1) - 1px} #{gutter-get(4) - 1px};
+	}
+
+	&.is-large
+	{
+		padding: #{gutter-get(3) - 1px} #{gutter-get(6) - 1px};
+	}
+
+	&.is-huge
+	{
+		padding: #{gutter-get(4) - 1px} #{gutter-get(7) - 1px};
+	}
+
+	&.is-icon
+	{
+		padding: #{gutter-get(2) - 1px};
+
+		&.is-small
+		{
+			padding: #{gutter-get(1) - 1px};
+		}
+
+		&.is-large
+		{
+			padding: #{gutter-get(3) - 1px};
+		}
+
+		&.is-huge
+		{
+			padding: #{gutter-get(4) - 1px};
+		}
+	}
+
+	@include state-disabled
+	{
+		filter: grayscale(100%);
+		opacity: .5;
+	}
+
+	&-contained
+	{
+		background: hsl(#{color-compose-variable(background, true)});
+		color: hsl(#{color-compose-variable(color)});
+
+		@include state-hover
+		{
+			--l: 7.5%;
+		}
+
+		@include state-active
+		{
+			--l: -7.5%;
+		}
+
+		.spinner
+		{
+			@include color-takeover(background, color);
+		}
+	}
+
+	&-outline
+	{
+		background: transparent;
+		border-color: #{color-no-variable(outline)};
+		color: #{color-no-variable(background)};
+
+		@include state-hover
+		{
+			border-color: #{color-no-variable(background, .5)};
+		}
+
+		@include state-active
+		{
+			background: #{color-no-variable(background, .075)};
+		}
+	}
+
+	&-text
+	{
+		background: transparent;
+		color: #{color-no-variable(background)};
+
+		@include state-hover
+		{
+			background: #{color-no-variable(background, .075)};
+		}
+
+		@include state-active
+		{
+			background: #{color-no-variable(background, .15)};
+		}
+	}
+
+	&-text-alt
+	{
+		background: #{color-no-variable(background, .1)};
+		color: #{color-no-variable(background)};
+
+		@include state-hover
+		{
+			background: #{color-no-variable(background, .15)};
+		}
+
+		@include state-active
+		{
+			background: #{color-no-variable(background, .2)};
+		}
+	}
+}

@@ -1,0 +1,120 @@
+@use "../function" as *;
+@use "../mixin" as *;
+
+.shell
+{
+	position: relative;
+	display: grid;
+	min-height: 100vh;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	z-index: 0;
+
+	&.has-app-bar
+	{
+		grid-template-rows: auto 1fr;
+	}
+
+	&.has-sheet
+	{
+		grid-template-columns: 300px 1fr;
+	}
+
+	> .app-bar
+	{
+		position: sticky;
+		top: 0;
+		z-index: 1;
+	}
+
+	@include responsive-up(lg)
+	{
+		.shell-sheet
+		{
+			position: sticky;
+			top: 0;
+			height: 100vh;
+			width: unset;
+
+			.sheet
+			{
+				width: 100%;
+			}
+		}
+	}
+
+	&-sheet
+	{
+		height: 100vh;
+		z-index: 2;
+
+		@include responsive-up(lg)
+		{
+			position: sticky;
+			top: 0;
+			background: #{color-no-variable(base-light)};
+			box-shadow: var(--shadow-outline-4);
+		}
+
+		@include responsive-down(md)
+		{
+			.sheet
+			{
+				width: 300px;
+				background: #{color-no-variable(base-light)};
+				box-shadow: var(--shadow-outline-16);
+			}
+		}
+	}
+
+	> .app-bar
+	{
+		grid-column: 1 / span 2;
+		grid-row: 1;
+	}
+
+	&.app-bar-in-content > .app-bar
+	{
+		grid-column: 2;
+		grid-row: 1;
+	}
+
+	&-sheet
+	{
+		grid-column: 1;
+		grid-row: 2;
+	}
+
+	&.app-bar-in-content &-sheet
+	{
+		grid-column: 1;
+		grid-row: 1 / span 2;
+	}
+
+	@include responsive-down(md)
+	{
+		&.has-sheet
+		{
+			grid-template-columns: 1fr;
+		}
+
+		> .app-bar
+		{
+			grid-column: 1;
+			grid-row: 1;
+		}
+
+		&.app-bar-in-content > .app-bar
+		{
+			grid-column: 1;
+			grid-row: 1;
+		}
+
+		.sheet-mount,
+		&.app-bar-in-content .sheet-mount
+		{
+			grid-column: unset;
+			grid-row: unset;
+		}
+	}
+}

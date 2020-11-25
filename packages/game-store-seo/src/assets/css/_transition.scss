@@ -1,0 +1,40 @@
+@keyframes route-enter
+{
+	0%
+	{
+		opacity: 0;
+		transform: translate3d(0, 12px, 0);
+	}
+	100%
+	{
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes route-leave
+{
+	0%
+	{
+		opacity: 1;
+		transform: none;
+	}
+	100%
+	{
+		opacity: 0;
+		transform: none;
+	}
+}
+
+.route-transition
+{
+	&-enter-active
+	{
+		animation: route-enter 180ms var(--swiftOut) both;
+	}
+
+	&-leave-active
+	{
+		animation: route-leave 180ms var(--swiftOut) both;
+	}
+}

@@ -1,0 +1,30 @@
+@use "../config";
+@use "../function" as *;
+
+#{config.$icon-selector}
+{
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+	font-size: 1em;
+	line-height: 1em;
+	vertical-align: middle;
+
+	&.is-boxed
+	{
+		padding: .5em;
+		background: #{color-no-variable(background)};
+		color: #{color-no-variable(color)};
+	}
+
+	&.is-large-alt
+	{
+		height: 2.5em;
+		padding: .75em;
+		width: 2.5em;
+		background: #{color-no-variable(background, .1)};
+		border-radius: 2em;
+		color: #{color-no-variable(background)};
+		font-size: 24px;
+	}
+}

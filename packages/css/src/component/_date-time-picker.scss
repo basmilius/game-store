@@ -1,0 +1,106 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.date-picker
+{
+	&-header
+	{
+		position: sticky;
+		top: 0;
+		background: #{color-no-variable(base-light)};
+		border-radius: #{config.$radius} #{config.$radius} 0 0;
+
+		.btn
+		{
+			text-transform: capitalize;
+		}
+	}
+
+	&-dates
+	{
+		display: grid;
+		grid-template-columns: repeat(7, 1fr);
+
+		.btn
+		{
+			height: 42px;
+			padding: 0;
+			width: 100%;
+			font-size: .9rem;
+
+			&.is-other-month
+			{
+				cursor: not-allowed;
+				pointer-events: none;
+
+				&:not(.is-selected-date)
+				{
+					color: #{color-no-variable(background, .5)};
+				}
+			}
+
+			&.is-current-date
+			{
+				@include color-takeover(background, primary);
+			}
+
+			&.is-in-range
+			{
+				background: #{color-no-variable(primary, .1)};
+				border-radius: 0;
+			}
+
+			&.is-range-start
+			{
+				border-radius: #{config.$radius} 0 0 #{config.$radius};
+			}
+
+			&.is-range-end
+			{
+				border-radius: 0 #{config.$radius} #{config.$radius} 0;
+			}
+
+			&.is-selected-date
+			{
+				@include color-takeover(background, primary);
+				@include color-takeover(color, primary-on);
+			}
+
+			@include responsive-down(sm)
+			{
+				height: 36px;
+			}
+		}
+	}
+
+	&-months,
+	&-years
+	{
+		overflow: auto;
+
+		.nav-link
+		{
+			text-transform: capitalize;
+		}
+	}
+
+	&-day
+	{
+		margin-bottom: #{gutter-get(3)};
+		font-size: .9rem;
+		opacity: .5;
+		text-align: center;
+		text-transform: capitalize;
+	}
+}
+
+.popup .date-picker
+{
+	width: 342px;
+
+	@include responsive-down(sm)
+	{
+		width: 312px;
+	}
+}

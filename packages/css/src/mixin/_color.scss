@@ -1,0 +1,35 @@
+@use "sass:color";
+
+@mixin fill-variable($name, $color)
+{
+	--#{$name}: var(--#{$color});
+	--#{$name}-l: var(--#{$color}-l);
+}
+
+@mixin fill-variable-on($name, $color)
+{
+	--#{$name}: var(--#{$color}-on);
+	--#{$name}-l: var(--#{$color}-on-l);
+}
+
+@mixin make-variable($name, $color, $color-on)
+{
+	--#{$name}: #{color.hue($color)}, #{color.saturation($color)};
+	--#{$name}-l: #{color.lightness($color)};
+
+	--#{$name}-on: #{color.hue($color-on)}, #{color.saturation($color-on)};
+	--#{$name}-on-l: #{color.lightness($color-on)};
+}
+
+@mixin takeover($name, $from: inherit)
+{
+	@if $from == inherit
+	{
+		--#{$name}: inherit;
+		--#{$name}-l: inherit;
+	} @else
+	{
+		--#{$name}: var(--#{$from});
+		--#{$name}-l: var(--#{$from}-l);
+	}
+}

@@ -1,0 +1,89 @@
+*,
+*::before,
+*::after
+{
+	box-sizing: border-box;
+}
+
+body,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd
+{
+	margin: 0;
+}
+
+p:not(:last-child)
+{
+	margin-bottom: 1rem;
+}
+
+ul[class],
+ol[class],
+button
+{
+	padding: 0;
+}
+
+ul[class],
+ol[class]
+{
+	list-style-type: none;
+}
+
+html
+{
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body
+{
+	line-height: 1.6em;
+	scroll-behavior: smooth;
+	text-rendering: optimizeSpeed;
+}
+
+a:not([class])
+{
+	text-decoration-skip-ink: auto;
+}
+
+img
+{
+	display: block;
+}
+
+article > * + *
+{
+	margin-top: 1em;
+}
+
+input,
+button,
+textarea,
+select
+{
+	font: inherit;
+
+	&[disabled],
+	&.is-disabled
+	{
+		cursor: not-allowed;
+	}
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+	*, ::before, ::after
+	{
+		animation-play-state: paused !important;
+		scroll-behavior: auto !important;
+		transition: none !important;
+	}
+}

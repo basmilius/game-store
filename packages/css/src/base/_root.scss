@@ -1,0 +1,58 @@
+@use "sass:list";
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+$-shadow-outline: 0 0 0 1px #{color-no-variable(outline)};
+
+@include state-dark-mode(true)
+{
+	--bg: #{config.$body-dark-bg};
+	--fg: #{config.$body-dark-color};
+	--variant-light: -3%;
+	--variant-lighter: -6%;
+	--shadow: #{red(config.$shadow-color-dark)}, #{green(config.$shadow-color-dark)}, #{blue(config.$shadow-color-dark)};
+
+	@each $name, $color in config.$colors-dark
+	{
+		@include color-make-variable($name, list.nth($color, 1), list.nth($color, 2));
+	}
+}
+
+@include state-light-mode(true)
+{
+	--bg: #{config.$body-bg};
+	--fg: #{config.$body-color};
+	--variant-light: 7%;
+	--variant-lighter: 9%;
+	--shadow: #{red(config.$shadow-color)}, #{green(config.$shadow-color)}, #{blue(config.$shadow-color)};
+
+	@each $name, $color in config.$colors
+	{
+		@include color-make-variable($name, list.nth($color, 1), list.nth($color, 2));
+	}
+}
+
+:root
+{
+	@each $name, $function in config.$easing-functions
+	{
+		--#{$name}: #{$function};
+	}
+
+	@each $level in config.$elevation-levels
+	{
+		@if $level == 0
+		{
+			--shadow-#{$level}: none;
+			--shadow-outline-#{$level}: #{$-shadow-outline};
+		} @else
+		{
+			--shadow-#{$level}: #{elevation-generate($level)};
+			--shadow-outline-#{$level}: #{elevation-generate($level)}, #{$-shadow-outline};
+		}
+	}
+
+	@include color-fill-variable(background, base-dark);
+	@include color-fill-variable-on(color, base-dark);
+}

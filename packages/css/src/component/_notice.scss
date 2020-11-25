@@ -1,0 +1,97 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.notice
+{
+	position: relative;
+	display: flex;
+	padding: #{gutter-get(2)} #{gutter-get(6)};
+	align-items: flex-start;
+
+	&::before
+	{
+		position: absolute;
+		display: block;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 6px;
+		content: "";
+		background: #{color-no-variable(background)};
+		border-radius: #{config.$radius};
+	}
+
+	&-content
+	{
+		display: flex;
+		align-items: flex-start;
+	}
+
+	&-body
+	{
+		display: flex;
+		align-items: flex-start;
+		flex: 1 1 0;
+		flex-flow: column;
+	}
+
+	&.is-serious
+	{
+		padding: #{gutter-get(4)} #{gutter-get(6)};
+		background: #{color-no-variable(background, .1)};
+		border-radius: #{config.$radius};
+	}
+
+	&.is-fluid
+	{
+		padding: #{gutter-get(5)} #{gutter-get(6)};
+		background: #{color-no-variable(background, .1)};
+		border-radius: 0;
+
+		&::before
+		{
+			display: none;
+		}
+	}
+
+	&.is-fluid,
+	&.is-serious
+	{
+		.close
+		{
+			@include color-takeover(background);
+		}
+	}
+
+	.close
+	{
+		margin-right: -9px;
+	}
+
+	> * + *,
+	&-content > * + *
+	{
+		margin-left: #{gutter-get(4)};
+	}
+
+	> #{config.$icon-selector},
+	&-content > #{config.$icon-selector}
+	{
+		color: #{color-no-variable(background)};
+		font-size: 24px;
+	}
+}
+
+.panel > .notice
+{
+	&.is-serious
+	{
+		border-radius: 0;
+	}
+
+	&::before
+	{
+		border-radius: 0 #{config.$radius} #{config.$radius} 0;
+	}
+}

@@ -1,0 +1,11 @@
+.virtual-scroller
+{
+	position: relative;
+	overflow: auto;
+
+	&-items
+	{
+		position: relative;
+		display: block;
+	}
+}

@@ -1,0 +1,63 @@
+@use "../config";
+@use "../function" as *;
+
+.arrow
+{
+	--position: 20px;
+
+	position: absolute;
+	height: 23px;
+	width: 23px;
+	transform: translate(var(--translate));
+
+	&::before
+	{
+		position: absolute;
+		display: block;
+		top: 3px;
+		left: 3px;
+		height: 17px;
+		width: 17px;
+		content: "";
+		background: #{color-no-variable(background)};
+		border: 1px solid #{color-no-variable(border)};
+		border-radius: #{config.$radius * .75};
+		transform: rotate(45deg);
+	}
+
+	&-top
+	{
+		--translate: -11px, -11px;
+
+		top: 0;
+		left: var(--position);
+		clip-path: inset(0 0 11px 0);
+	}
+
+	&-left
+	{
+		--translate: -11px, -11px;
+
+		top: var(--position);
+		left: 0;
+		clip-path: inset(0 11px 0 0);
+	}
+
+	&-right
+	{
+		--translate: 11px, -11px;
+
+		top: var(--position);
+		right: 0;
+		clip-path: inset(0 0 0 11px);
+	}
+
+	&-bottom
+	{
+		--translate: -11px, 11px;
+
+		left: var(--position);
+		bottom: 1px;
+		clip-path: inset(11px 0 0 0);
+	}
+}

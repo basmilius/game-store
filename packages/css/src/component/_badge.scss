@@ -1,0 +1,83 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.badge
+{
+	display: inline-flex;
+	padding: #{gutter-get(1) / 2} #{gutter-get(4)};
+	align-items: center;
+	background: #{color-no-variable(background, .15)};
+	border-radius: #{gutter-get(4)};
+	color: #{color-no-variable(background)};
+	letter-spacing: .5px;
+	text-decoration: none;
+	vertical-align: middle;
+
+	> * + *
+	{
+		margin-left: #{gutter-get(2)};
+	}
+
+	.avatar
+	{
+		font-size: 24px;
+
+		&:first-child
+		{
+			margin-left: -#{gutter-get(1)};
+		}
+
+		&:last-child
+		{
+			margin-right: -#{gutter-get(1)};
+		}
+	}
+
+	.close
+	{
+		@include color-takeover(background);
+
+		font-size: 21px;
+
+		&:first-child
+		{
+			margin-left: -#{gutter-get(2)};
+		}
+
+		&:last-child
+		{
+			margin-right: -#{gutter-get(2)};
+		}
+	}
+
+	#{config.$icon-selector}
+	{
+		font-size: 24px;
+
+		&:first-child
+		{
+			margin-left: -#{gutter-get(3)};
+		}
+
+		&:last-child
+		{
+			margin-right: -#{gutter-get(3)};
+		}
+	}
+
+	.spinner
+	{
+		font-size: 15px;
+
+		&:first-child
+		{
+			margin-left: -#{gutter-get(1)};
+		}
+
+		&:last-child
+		{
+			margin-right: -#{gutter-get(1)};
+		}
+	}
+}

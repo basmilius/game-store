@@ -1,0 +1,129 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.panel
+{
+	position: relative;
+	display: flex;
+	flex-flow: column;
+
+	@at-root a#{&}
+	{
+		color: unset;
+		text-decoration: none;
+		transition: box-shadow 240ms var(--swiftOut);
+
+		&[class*="shadow-outline-"]:hover,
+		&[class*="shadow-outline-"]:focus
+		{
+			box-shadow: var(--shadow-outline-6) !important;
+		}
+	}
+
+	&-body
+	{
+		display: block;
+		padding: #{gutter-get(6)};
+		flex: 1 1 auto;
+	}
+
+	&-column
+	{
+		display: flex;
+		flex: 0 0 auto;
+		flex-flow: column;
+	}
+
+	&-row
+	{
+		display: flex;
+		align-items: center;
+	}
+
+	&-footer
+	{
+		display: flex;
+		align-items: center;
+		padding: #{gutter-get(4)} #{gutter-get(6)};
+		background: #{color-no-variable(outline, .25)};
+
+		&-sticky
+		{
+			position: sticky;
+			bottom: 0;
+			background: inherit;
+			z-index: 1;
+		}
+	}
+
+	&-header
+	{
+		display: flex;
+		min-height: 70px;
+		padding: 0 #{gutter-get(6)};
+		align-items: center;
+
+		&-sticky
+		{
+			position: sticky;
+			top: 0;
+			background: inherit;
+			z-index: 1;
+		}
+	}
+
+	&-header + #{&}-body
+	{
+		padding-top: 0;
+	}
+
+	&-title
+	{
+		font-weight: 700;
+	}
+
+	&-sub-title
+	{
+		font-size: .9em;
+		font-weight: 700;
+		opacity: .5;
+	}
+
+	&-media
+	{
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+
+		&:first-child
+		{
+			border-radius: #{config.$radius} #{config.$radius} 0 0;
+		}
+
+		&:last-child
+		{
+			border-radius: 0 0 #{config.$radius} #{config.$radius};
+		}
+
+		&:only-child
+		{
+			border-radius: #{config.$radius};
+		}
+	}
+
+	&-column > &-media
+	{
+		border-radius: #{config.$radius};
+	}
+
+	&.flex-row > &-body
+	{
+		align-self: center;
+	}
+
+	> .divider
+	{
+		margin: 0;
+	}
+}

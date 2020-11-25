@@ -1,0 +1,23 @@
+.avatar
+{
+	position: relative;
+	display: block;
+	min-height: 1em;
+	min-width: 1em;
+	height: 1em;
+	width: 1em;
+	flex: 0 0 1em;
+	border-radius: .35em;
+	line-height: 1em;
+
+	img,
+	svg
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 1em;
+		width: 1em;
+		border-radius: 1em;
+	}
+}

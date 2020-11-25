@@ -1,0 +1,33 @@
+@use "sass:map";
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+$-levels: ();
+$-levels-outline: ();
+
+@each $level in config.$elevation-levels
+{
+	$-levels: map.merge($-levels, (
+		$level: var(--shadow-#{$level})
+	));
+
+	$-levels-outline: map.merge($-levels-outline, (
+		$level: var(--shadow-outline-#{$level})
+	));
+}
+
+$-background-utilities: (
+	(
+		property: box-shadow,
+		class: shadow,
+		values: $-levels
+	),
+	(
+		property: box-shadow,
+		class: shadow-outline,
+		values: $-levels-outline
+	)
+);
+
+@include utility-make-utilities($-background-utilities, false);

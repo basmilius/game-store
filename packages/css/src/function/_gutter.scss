@@ -1,0 +1,7 @@
+@use "sass:map";
+@use "../config";
+
+@function get($key)
+{
+	@return map.get(config.$gutters, $key);
+}

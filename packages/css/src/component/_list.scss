@@ -1,0 +1,38 @@
+@use "../function" as *;
+@use "../mixin" as *;
+
+.list
+{
+	display: flex;
+	flex-flow: column;
+
+	&-item
+	{
+		display: flex;
+
+		&-column
+		{
+			display: flex;
+			padding: #{gutter-get(3)} #{gutter-get(6)};
+			flex-flow: column;
+		}
+
+		@at-root a#{&}
+		{
+			color: unset;
+			cursor: pointer;
+			text-decoration: unset;
+			transition: background 120ms var(--swiftOut);
+
+			@include state-hover
+			{
+				background: #{color-no-variable(outline, .35)};
+			}
+		}
+	}
+
+	&-divided &-item + &-item
+	{
+		border-top: 1px solid #{color-no-variable(outline, .5)};
+	}
+}

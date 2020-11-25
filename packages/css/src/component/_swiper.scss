@@ -1,0 +1,32 @@
+.swiper
+{
+	position: relative;
+	display: block;
+	cursor: move;
+	transition: height 300ms var(--decelerationCurve);
+	user-select: none;
+	z-index: 0;
+
+	&-mount
+	{
+		position: relative;
+		display: block;
+		overflow: hidden;
+	}
+
+	&-item
+	{
+		position: absolute;
+		display: block;
+	}
+
+	&:not(.is-dragging) &-item
+	{
+		transition: 300ms var(--decelerationCurve);
+	}
+
+	a.panel
+	{
+		cursor: inherit;
+	}
+}

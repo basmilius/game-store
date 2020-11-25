@@ -1,0 +1,1 @@
+export { onHotKey } from "./onHotKey";

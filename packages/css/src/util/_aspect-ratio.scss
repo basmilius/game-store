@@ -1,0 +1,31 @@
+$-ratios: (
+	"1\\/1": 100%,
+	"4\\/3": percentage(3 / 4),
+	"16\\/9": percentage(9 / 16),
+	"21\\/9": percentage(9 / 21),
+	"2\\/1": 50%
+);
+
+.aspect-ratio
+{
+	position: relative;
+
+	&-item
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 100%;
+		width: 100%;
+	}
+
+	@each $ratio, $percentage in $-ratios
+	{
+		&-#{$ratio}
+		{
+			padding-bottom: $percentage;
+		}
+	}
+}

@@ -1,0 +1,151 @@
+@use "../function" as *;
+@use "../mixin" as *;
+
+@keyframes overlay-close
+{
+	from
+	{
+		opacity: 1;
+	}
+
+	to
+	{
+		opacity: 0;
+	}
+}
+
+@keyframes overlay-open
+{
+	from
+	{
+		opacity: 0;
+	}
+
+	to
+	{
+		opacity: 1;
+	}
+}
+
+@keyframes overlay-body-close
+{
+	from
+	{
+		transform: none;
+	}
+
+	to
+	{
+		transform: var(--transform);
+	}
+}
+
+@keyframes overlay-body-open
+{
+	from
+	{
+		transform: var(--transform);
+	}
+
+	to
+	{
+		transform: none;
+	}
+}
+
+.overlay
+{
+	position: fixed;
+	display: flex;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100vh;
+	width: 100vw;
+	padding: #{gutter-get(6)};
+	justify-content: center;
+	background: rgba(black, .4);
+	overflow: auto;
+	pointer-events: all;
+
+	&-enter-active
+	{
+		animation: overlay-open 240ms var(--swiftOut) both;
+	}
+
+	&-leave-active
+	{
+		animation: overlay-close 240ms var(--swiftOut) both;
+	}
+
+	&-enter-active > *
+	{
+		animation: overlay-body-open 240ms var(--swiftOut) both;
+	}
+
+	&-leave-active > *
+	{
+		animation: overlay-body-close 240ms var(--swiftOut) both;
+	}
+
+	> *
+	{
+		position: relative;
+	}
+
+	&-top
+	{
+		--transform: translate3d(0, -30px, 0);
+
+		align-items: flex-start;
+	}
+
+	&-bottom
+	{
+		--transform: translate3d(0, 30px, 0);
+
+		align-items: flex-start;
+	}
+
+	&-center
+	{
+		--transform: perspective(500px) translateZ(-25px);
+
+		align-items: center;
+	}
+
+	&-bottom > *
+	{
+		margin-top: auto;
+	}
+
+	@include responsive-down(md)
+	{
+		&-mobile-top
+		{
+			--transform: translate3d(0, -30px, 0);
+
+			align-items: flex-start;
+		}
+
+		&-mobile-center
+		{
+			--transform: perspective(500px) translateZ(-25px);
+
+			align-items: center;
+		}
+
+		&-mobile-bottom
+		{
+			--transform: translate3d(0, 30px, 0);
+
+			align-items: flex-start;
+		}
+
+		&-mobile-bottom > *
+		{
+			margin-top: auto;
+		}
+	}
+}

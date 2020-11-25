@@ -1,0 +1,65 @@
+@keyframes expandable
+{
+	0%
+	{
+		margin-top: calc(0px - var(--height));
+		opacity: 0;
+	}
+	30%
+	{
+		opacity: 0;
+	}
+	50%
+	{
+		margin-top: 0;
+	}
+	100%
+	{
+		opacity: 1;
+	}
+}
+
+@keyframes expandable-simple
+{
+	0%
+	{
+		margin-top: calc(0px - var(--height));
+		opacity: 0;
+	}
+	50%
+	{
+		margin-top: 0;
+		opacity: 0;
+	}
+	100%
+	{
+		margin-top: 0;
+		opacity: 1;
+	}
+}
+
+.expandable
+{
+	&-enter-active
+	{
+		animation: expandable .6s var(--swiftOut) both;
+	}
+
+	&-leave-active
+	{
+		animation: expandable .6s alternate-reverse var(--swiftOut) both;
+	}
+}
+
+.expandable-simple
+{
+	&-enter-active
+	{
+		animation: expandable-simple .3s linear .15s both;
+	}
+
+	&-leave-active
+	{
+		animation: expandable-simple .3s alternate-reverse linear both;
+	}
+}

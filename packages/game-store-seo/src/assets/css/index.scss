@@ -1,0 +1,36 @@
+@use "~@latte-ui/css" with (
+	$colors: (
+		primary: (#2563ea, white),
+		base-dark: (#191a1c, white),
+		base-light: (white, #191a1c),
+		dark: (#191a1c, white),
+		light: (white, #191a1c),
+		outline: (#dbe2ea, #191a1c),
+		error: (#f50008, white),
+		info: (#007bc8, white),
+		success: (#00885c, white),
+		warning: (#fba700, white)
+	),
+	$colors-dark: (
+		primary: (#2563ea, white),
+		base-dark: (white, #191a1c),
+		base-light: (#191a1c, white),
+		dark: (#191a1c, white),
+		light: (white, #191a1c),
+		muted: (#000000, #b6b6b7),
+		outline: (#313337, #dbe2ea),
+		error: (#f50008, #191a1c),
+		info: (#007bc8, #191a1c),
+		success: (#00885c, #191a1c),
+		warning: (#fba700, #191a1c)
+	),
+	$dark-mode: disabled,
+	$font-family: proxima-nova
+);
+
+@use "transition";
+
+@use "logo";
+
+@use "header";
+@use "games";

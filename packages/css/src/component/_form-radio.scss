@@ -1,0 +1,32 @@
+@use "../function" as *;
+@use "../mixin" as *;
+
+.form-radio
+{
+	@include form-base-form-element;
+	@include form-base-form-toggle;
+
+	height: 24px;
+	width: 24px;
+	border-radius: 12px;
+
+	&::before
+	{
+		height: 100%;
+		width: 100%;
+		background: transparent;
+		mask: url(~@latte-ui/css/src/image/radio-icon.svg) no-repeat center center / 18px;
+		transition-property: background;
+	}
+
+	&:checked
+	{
+		background: #{color-no-variable(background)};
+		border-color: #{color-no-variable(background)};
+
+		&::before
+		{
+			background: #{color-no-variable(color)};
+		}
+	}
+}

@@ -1,0 +1,28 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.progress
+{
+	position: relative;
+
+	&-bar
+	{
+		height: #{gutter-get(3)};
+		margin: #{gutter-get(1)} 0;
+		width: 100%;
+		background: #{color-no-variable(outline)};
+		border-radius: #{config.$radius};
+		overflow: hidden;
+		user-select: none;
+
+		&-value
+		{
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: inherit;
+			background: #{color-no-variable(background)};
+		}
+	}
+}

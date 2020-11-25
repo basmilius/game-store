@@ -1,0 +1,79 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.app-bar
+{
+	position: relative;
+	display: flex;
+	flex-flow: column;
+	background: #{color-no-variable(background)};
+	color: #{color-no-variable(color)};
+	transition: 180ms var(--swiftOut);
+	transition-property: background, box-shadow, filter;
+
+	&.is-transparent
+	{
+		background: transparent;
+		filter: drop-shadow(0 1px 2px #{rgba(black, .5)});
+	}
+
+	&.is-main
+	{
+		position: sticky;
+		top: 0;
+		z-index: 1000;
+	}
+
+	&-column
+	{
+		position: relative;
+		display: flex;
+		flex-flow: column;
+	}
+
+	&-row
+	{
+		position: relative;
+		display: flex;
+		height: var(--height, 60px);
+		padding-left: #{gutter-get(4)};
+		padding-right: #{gutter-get(4)};
+		align-items: center;
+
+		&.is-auto-height
+		{
+			height: unset;
+		}
+
+		> .divider-vertical
+		{
+			height: calc(var(--height, 60px) - #{gutter-get(4) * 2});
+		}
+	}
+
+	&-title,
+	&-sub-title,
+	.mx
+	{
+		margin-left: #{gutter-get(4)};
+		margin-right: #{gutter-get(4)};
+	}
+
+	&-title
+	{
+		font-size: 1.1em;
+	}
+
+	&-sub-title
+	{
+		font-size: 0.85em;
+		opacity: .8;
+	}
+
+	.btn
+	{
+		@include color-takeover(color);
+		@include color-takeover(background, color);
+	}
+}

@@ -1,0 +1,104 @@
+@use "../config";
+@use "../function" as *;
+
+$-border-color: hsla(#{color-compose-variable(outline)}, .5);
+$-border: 1px solid #{$-border-color};
+$-hover: #{color-compose-variable(outline, true)};
+
+th, td
+{
+	text-align: left;
+}
+
+.table
+{
+	border-collapse: collapse;
+	border-style: hidden;
+	overflow: hidden;
+	z-index: 0;
+
+	td, th
+	{
+		margin: 0;
+		padding: #{gutter-get(3)} #{gutter-get(6)};
+		vertical-align: top;
+	}
+
+	thead th
+	{
+		background: hsl(#{color-compose-variable(outline, unquote("var(--variant-lighter)"))});
+	}
+
+	&-border
+	{
+		border-radius: #{config.$radius};
+		box-shadow: 0 0 0 1px $-border-color;
+
+		td, th
+		{
+			border-top: $-border;
+			border-bottom: $-border;
+		}
+	}
+
+	&-striped
+	{
+		th
+		{
+			border-top: $-border;
+			border-bottom: $-border;
+		}
+
+		tbody tr:not(:hover):nth-child(even) td
+		{
+			background: hsl(#{color-compose-variable(outline, unquote("var(--variant-lighter)"))});
+		}
+	}
+
+	&-hover
+	{
+		tbody tr td
+		{
+			transition: background 90ms var(--swiftOut);
+		}
+
+		tbody tr:hover td
+		{
+			background: hsl(#{color-compose-variable(outline, unquote("var(--variant-light)"))});
+		}
+	}
+
+	&-container
+	{
+		overflow: auto;
+	}
+}
+
+.panel > .table,
+.panel > .table-container,
+.panel > .table-container > .table
+{
+	border-radius: inherit;
+
+	&:not(:first-child)
+	{
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+
+	&:not(:last-child)
+	{
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+.panel > .table-container:not(:first-child)
+{
+	border-top: $-border;
+}
+
+.panel > .table-container:not(:last-child)
+{
+	border-bottom: $-border;
+}

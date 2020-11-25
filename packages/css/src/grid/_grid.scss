@@ -1,0 +1,74 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+%column
+{
+	padding-left: #{gutter-get(4)};
+	padding-right: #{gutter-get(4)};
+	width: 100%;
+}
+
+.row
+{
+	display: flex;
+	margin-left: -#{gutter-get(4)};
+	margin-right: -#{gutter-get(4)};
+	flex-wrap: wrap;
+
+	&.no-gutter
+	{
+		margin-left: 0;
+		margin-right: 0;
+
+		> .col,
+		> [class*="col-"]
+		{
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}
+
+@each $breakpoint in map-keys(config.$breakpoints)
+{
+	@for $i from 1 through config.$columns
+	{
+		.#{responsive-prefix($breakpoint, col-#{$i})}
+		{
+			@extend %column;
+		}
+	}
+
+	.#{responsive-prefix($breakpoint, col)},
+	.#{responsive-prefix($breakpoint, col-auto)}
+	{
+		@extend %column;
+	}
+
+	@include responsive-up($breakpoint)
+	{
+		.#{responsive-prefix($breakpoint, col)}
+		{
+			flex: 1 0 0;
+			max-width: 100%;
+			min-width: 0;
+		}
+
+		.#{responsive-prefix($breakpoint, col-auto)}
+		{
+			flex: 0 0 auto;
+			max-width: 100%;
+			width: auto;
+		}
+
+		@for $i from 1 through config.$columns
+		{
+			.#{responsive-prefix($breakpoint, col-#{$i})}
+			{
+				max-width: percentage($i / config.$columns);
+				flex: 0 0 percentage($i / config.$columns);
+			}
+		}
+	}
+}

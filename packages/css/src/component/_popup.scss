@@ -1,0 +1,83 @@
+@use "panel";
+@use "../function" as *;
+@use "../mixin" as *;
+
+@keyframes popup-close
+{
+	from
+	{
+		opacity: 1;
+		transform: none;
+	}
+	to
+	{
+		opacity: 0;
+		transform: translate(var(--origin));
+	}
+}
+
+@keyframes popup-open
+{
+	from
+	{
+		opacity: 0;
+		transform: translate(var(--origin));
+	}
+	to
+	{
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.popup
+{
+	@extend .panel;
+
+	--origin: 0, 0;
+
+	position: fixed;
+	pointer-events: all;
+
+	&-enter-active
+	{
+		animation: popup-open 240ms var(--swiftOut) both;
+	}
+
+	&-leave-active
+	{
+		animation: popup-close 240ms var(--swiftOut) both;
+	}
+
+	&-body
+	{
+		position: relative;
+		display: block;
+		max-height: 40vh;
+		border-radius: inherit;
+		overflow: auto;
+
+		@include responsive-up(md)
+		{
+			max-width: calc(100vw - 96px);
+		}
+
+		&::-webkit-scrollbar
+		{
+			width: 0;
+			background: transparent;
+		}
+
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.arrow
+	{
+		@include color-takeover(background, base-light);
+		@include color-takeover(border, outline);
+
+		--position: calc(50% - var(--p, 0px));
+	}
+}

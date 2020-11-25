@@ -1,0 +1,116 @@
+@use "../function" as *;
+
+@keyframes sheet-mount-close
+{
+	from
+	{
+		opacity: 1;
+	}
+
+	to
+	{
+		opacity: 0;
+	}
+}
+
+@keyframes sheet-mount-open
+{
+	from
+	{
+		opacity: 0;
+	}
+
+	to
+	{
+		opacity: 1;
+	}
+}
+
+.sheet
+{
+	--size: 100vh;
+	--transform: 0, 0;
+
+	position: fixed;
+	display: flex;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	pointer-events: all;
+
+	&-mount
+	{
+		position: relative;
+		display: block;
+		overflow: auto;
+		transform: translate(var(--transform));
+	}
+
+	&:not(.is-touching) &-mount
+	{
+		transition: transform 240ms var(--decelerationCurve);
+	}
+
+	&.is-modal
+	{
+		background: hsla(#{color-compose-variable(dark)}, .25);
+	}
+
+	&-enter-active
+	{
+		animation: sheet-mount-open 360ms var(--swiftOut);
+	}
+
+	&-leave-active
+	{
+		animation: sheet-mount-close 360ms var(--swiftOut);
+	}
+
+	&.is-top
+	{
+		align-items: flex-start;
+		justify-content: flex-start;
+
+		--origin: 0, -100%;
+	}
+
+	&.is-left
+	{
+		align-items: flex-start;
+		justify-content: flex-start;
+
+		--origin: -100%, 0;
+	}
+
+	&.is-right
+	{
+		align-items: flex-start;
+		justify-content: flex-end;
+
+		--origin: 100%, 0;
+	}
+
+	&.is-bottom
+	{
+		align-items: flex-end;
+		justify-content: flex-start;
+
+		--origin: 0, 100%;
+	}
+
+	&.is-top &-mount,
+	&.is-bottom &-mount
+	{
+		max-height: var(--size);
+		width: inherit;
+	}
+
+	&.is-left &-mount,
+	&.is-right &-mount
+	{
+		max-width: var(--size);
+		height: inherit;
+	}
+}

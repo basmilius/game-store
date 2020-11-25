@@ -1,0 +1,20 @@
+{
+	"private": true,
+	"version": "2.0.0-dev",
+	"author": {
+		"name": "Bas Milius",
+		"email": "hello@bas.dev",
+		"url": "https://bas.dev"
+	},
+	"scripts": {
+		"gs:build": "yarn workspace @bybas/gs-website run build",
+		"gs:serve": "yarn workspace @bybas/gs-website run serve",
+		"gs-responsive:build": "yarn workspace @bybas/gs-website-responsive run build",
+		"gs-responsive:serve": "yarn workspace @bybas/gs-website-responsive run serve",
+		"gs-seo:build": "yarn workspace @bybas/gs-website-seo run build",
+		"gs-seo:serve": "yarn workspace @bybas/gs-website-seo run serve"
+	},
+	"workspaces": [
+		"packages/*"
+	]
+}

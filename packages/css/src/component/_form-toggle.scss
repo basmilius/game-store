@@ -1,0 +1,34 @@
+@use "../function" as *;
+@use "../mixin" as *;
+
+.form-toggle
+{
+	@include form-base-form-element;
+	@include form-base-form-toggle;
+
+	height: 24px;
+	width: 39px;
+	border-radius: 12px;
+
+	&::before
+	{
+		height: 16px;
+		margin: 3px;
+		width: 16px;
+		background: #{color-no-variable(outline)};
+		border-radius: 9px;
+		transition-property: margin-left, background;
+	}
+
+	&:checked
+	{
+		background: #{color-no-variable(background)};
+		border-color: #{color-no-variable(background)};
+
+		&::before
+		{
+			margin-left: 18px;
+			background: #{color-no-variable(color)};
+		}
+	}
+}

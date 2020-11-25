@@ -1,0 +1,41 @@
+@use "../config";
+
+@function next($name)
+{
+	$names: map-keys(config.$breakpoints);
+	$n: index($names, $name);
+
+	@if not $n
+	{
+		@error "Breakpoint '#{$name}' not found in '#{config.$breakpoints}'."
+	}
+
+	@return if($n < length($names), nth($names, $n + 1), null);
+}
+
+@function minWidth($name)
+{
+	$min: map-get(config.$breakpoints, $name);
+
+	@return if($min != 0, $min, null);
+}
+
+@function maxWidth($name)
+{
+	$next: next($name);
+
+	@return if($next, minWidth($next) - .02, null);
+}
+
+@function prefix($name, $className)
+{
+	$names: map-keys(config.$breakpoints);
+	$n: index($names, $name);
+
+	@if not $n
+	{
+		@error "Breakpoint '#{$name}' not found in '#{config.$breakpoints}'."
+	}
+
+	@return if($n == 1, $className, #{$name}\:#{$className});
+}

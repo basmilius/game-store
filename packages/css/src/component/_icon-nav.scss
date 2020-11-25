@@ -1,0 +1,106 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.icon-nav
+{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	background: #{color-no-variable(background)};
+	color: #{color-no-variable(color)};
+
+	&-horizontal
+	{
+		padding-left: #{gutter-get(4)};
+		padding-right: #{gutter-get(4)};
+		flex-flow: row nowrap;
+	}
+
+	&-vertical
+	{
+		padding-top: #{gutter-get(4)};
+		padding-bottom: #{gutter-get(4)};
+		flex-flow: column nowrap;
+	}
+
+	&-item
+	{
+		display: flex;
+		align-items: center;
+		flex: 1 1 0;
+		flex-flow: column;
+		justify-content: center;
+		background: transparent;
+		border: 0;
+		color: #{color-no-variable(color, .5)};
+		cursor: pointer;
+		outline: 0;
+		text-align: center;
+		transition: 240ms var(--swiftOut);
+		transition-property: flex, color;
+
+		@include state-hover
+		{
+			color: #{color-no-variable(color, .75)};
+		}
+
+		@include state-active
+		{
+			color: #{color-no-variable(color)};
+		}
+
+		#{config.$icon-selector}
+		{
+			font-size: 24px;
+		}
+
+		span
+		{
+			margin-top: #{gutter-get(1)};
+			font-size: .8rem;
+			font-weight: 700;
+			line-height: 1em;
+		}
+	}
+
+	&-horizontal &-item
+	{
+		height: 60px;
+	}
+
+	&-vertical &-item
+	{
+		min-height: 60px;
+		width: 60px;
+	}
+
+	&.is-shifting &-item
+	{
+		#{config.$icon-selector}
+		{
+			transition: inherit;
+			transition-property: transform;
+		}
+
+		span
+		{
+			transition: inherit;
+			transition-property: opacity, transform;
+		}
+
+		@include state-active-not
+		{
+			#{config.$icon-selector}
+			{
+				transform: translate3d(0, calc(.4rem + #{gutter-get(1) / 2}), 0);
+			}
+
+			span
+			{
+				opacity: 0;
+				transform: translate3d(0, .5em, 0);
+			}
+		}
+	}
+}

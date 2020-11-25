@@ -1,0 +1,277 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.nav
+{
+	display: flex;
+	flex-flow: column;
+
+	&-link
+	{
+		display: flex;
+		align-items: center;
+		background: transparent;
+		border: 0;
+		color: unset;
+		cursor: pointer;
+		line-height: 24px;
+		outline: 0;
+		text-decoration: none;
+
+		#{config.$icon-selector},
+		.avatar,
+		.spinner
+		{
+			align-self: flex-start;
+			font-size: 24px;
+		}
+
+		.badge
+		{
+			margin-top: -#{gutter-get(1\/2)};
+			margin-bottom: -#{gutter-get(1\/2)};
+		}
+
+		@include state-focus-visible
+		{
+			@include state-focus-ring;
+		}
+	}
+
+	&-breadcrumb
+	{
+		flex-flow: row;
+	}
+
+	&-breadcrumb &-link
+	{
+		font-size: .95em;
+
+		@include state-hover
+		{
+			text-decoration: underline;
+			text-decoration-color: #{color-no-variable(background)};
+		}
+
+		@include state-active
+		{
+			font-weight: 700;
+		}
+	}
+
+	&-breadcrumb &-link + &-link
+	{
+		margin-left: #{gutter-get(6)};
+
+		&::before
+		{
+			position: absolute;
+			display: block;
+			margin-left: -#{gutter-get(6)};
+			width: #{gutter-get(6)};
+			font-weight: 400;
+			opacity: .25;
+			pointer-events: none;
+			text-align: center;
+			text-decoration: none;
+			content: "/";
+		}
+	}
+
+	&-list
+	{
+		padding: #{gutter-get(2)} 0;
+	}
+
+	&-list &-list
+	{
+		padding: 0;
+	}
+
+	&-list &-header
+	{
+		position: sticky;
+		top: 0;
+		padding: #{gutter-get(3)} #{gutter-get(6)};
+		background: inherit;
+		font-size: .9em;
+		font-weight: 700;
+	}
+
+	&-list &-link
+	{
+		padding: #{gutter-get(3)} #{gutter-get(6)};
+
+		> * + *
+		{
+			margin-left: #{gutter-get(5)};
+		}
+
+		@include state-hover-focus-visible
+		{
+			background: hsl(#{color-compose-variable(outline, unquote("var(--variant-light)"))});
+		}
+
+		@include state-active
+		{
+			color: #{color-no-variable(background)};
+		}
+	}
+
+	&-list.flex-row &-link + &-link
+	{
+		margin-top: 0;
+		margin-left: #{gutter-get(1\/2)};
+	}
+
+	&-pagination
+	{
+		flex-flow: row;
+	}
+
+	&-pagination &-link
+	{
+		height: 30px;
+		min-width: 30px;
+		padding-top: #{gutter-get(1\/2)};
+		padding-left: #{gutter-get(1)};
+		padding-right: #{gutter-get(1)};
+		justify-content: center;
+		border-radius: #{config.$radius};
+		font-size: .8rem;
+		font-weight: 700;
+		line-height: 15px;
+		text-align: center;
+		transition: 120ms var(--swiftOut);
+		transition-property: background, color;
+
+		#{config.$icon-selector}
+		{
+			margin-top: 0;
+			align-self: center;
+			font-size: 15px;
+		}
+
+		@include state-hover
+		{
+			background: #{color-no-variable(outline, .5)};
+		}
+
+		@include state-active
+		{
+			background: #{color-no-variable(background)};
+			color: #{color-no-variable(color)};
+		}
+
+		@include state-disabled
+		{
+			background: unset;
+			color: unset;
+			cursor: not-allowed;
+			filter: grayscale(100%);
+			opacity: .5;
+		}
+	}
+
+	&-pagination &-link + &-link
+	{
+		margin-left: #{gutter-get(1\/2)};
+	}
+
+	&-pills &-link
+	{
+		padding: #{gutter-get(2)} #{gutter-get(5)};
+		background: transparent;
+		border: 0;
+		border-radius: #{config.$radius};
+		transition: 180ms var(--swiftOut);
+		transition-property: background, box-shadow, color;
+
+		&.is-icon
+		{
+			padding: #{gutter-get(2)};
+		}
+
+		> * + *
+		{
+			margin-left: #{gutter-get(3)};
+		}
+
+		@include state-hover
+		{
+			background: #{color-no-variable(outline, .35)};
+		}
+
+		@include state-active
+		{
+			background: #{color-no-variable(background)};
+			color: #{color-no-variable(color)};
+		}
+	}
+
+	&-pills &-link + &-link
+	{
+		margin-top: #{gutter-get(1)};
+	}
+
+	&-pills.flex-row &-link + &-link
+	{
+		margin-top: 0;
+		margin-left: #{gutter-get(1)};
+	}
+
+	&-tabs &-link
+	{
+		position: relative;
+		padding: #{gutter-get(3)} #{gutter-get(4)};
+		border-radius: #{config.$radius};
+		font-weight: 700;
+		transition: 90ms var(--swiftOut);
+		transition-property: background, color;
+
+		&::after
+		{
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: 0 #{gutter-get(4)};
+			content: "";
+			height: 3px;
+			background: transparent;
+			transition: inherit;
+			transition-property: background, margin;
+		}
+
+		> * + *
+		{
+			margin-left: #{gutter-get(3)};
+		}
+
+		@include state-hover
+		{
+			background: #{color-no-variable(outline, .35)};
+
+			&::after
+			{
+				margin: 0;
+			}
+		}
+
+		@include state-active
+		{
+			color: #{color-no-variable(background)};
+
+			&::after
+			{
+				background: #{color-no-variable(background)};
+			}
+		}
+	}
+
+	&.no-transition &-link
+	{
+		transition: none !important;
+	}
+}

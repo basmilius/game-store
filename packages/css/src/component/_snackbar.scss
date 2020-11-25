@@ -1,0 +1,104 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+@keyframes snackbar-close
+{
+	from
+	{
+		opacity: 1;
+		transform: translate3d(var(--target), 0);
+	}
+	to
+	{
+		opacity: 0;
+		transform: translate3d(var(--origin), 0);
+	}
+}
+
+@keyframes snackbar-open
+{
+	from
+	{
+		opacity: 0;
+		transform: translate3d(var(--origin), 0);
+	}
+	to
+	{
+		opacity: 1;
+		transform: translate3d(var(--target), 0);
+	}
+}
+
+.snackbar
+{
+	--origin: 0, 0;
+	--target: 0, 0;
+
+	position: relative;
+	display: flex;
+	max-width: calc(100vw - #{gutter-get(5) * 2});
+	width: 540px;
+	margin: #{gutter-get(5)};
+	padding: #{gutter-get(2)} #{gutter-get(6)};
+	align-items: flex-start;
+	justify-content: flex-start;
+	background: #{color-no-variable(background)};
+	border-radius: #{config.$radius};
+	color: #{color-no-variable(color)};
+	transform: translate3d(var(--target), 0);
+	transition: 240ms var(--swiftOut);
+	transition-property: top, bottom;
+
+	&-enter-active
+	{
+		animation: snackbar-open 240ms var(--swiftOut) both;
+	}
+
+	&-leave-active
+	{
+		animation: snackbar-close 240ms var(--swiftOut) both;
+	}
+
+	&-body
+	{
+		display: flex;
+		padding: #{gutter-get(1)} 0;
+		align-items: flex-start;
+		flex-grow: 1;
+
+		&:not(:last-child)
+		{
+			margin-right: #{gutter-get(2)};
+		}
+	}
+
+	.close
+	{
+		@include color-takeover(background, color);
+
+		margin-top: 6px;
+		margin-right: -9px;
+		flex-shrink: 0;
+	}
+
+	> * + *,
+	&-body > * + *
+	{
+		margin-left: #{gutter-get(4)};
+	}
+
+	> #{config.$icon-selector},
+	&-body > #{config.$icon-selector}
+	{
+		font-size: 24px;
+	}
+
+	.btn
+	{
+		@include color-takeover(color);
+		@include color-takeover(background, color);
+
+		margin-right: -#{gutter-get(4)};
+	}
+}

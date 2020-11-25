@@ -1,0 +1,25 @@
+@use "../config";
+@use "../function/color";
+
+@keyframes spinner
+{
+	to
+	{
+		transform: rotate(360deg);
+	}
+}
+
+.spinner
+{
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+	flex: 0 0 1em;
+	animation: spinner 600ms infinite linear;
+	border: .1em solid #{color.no-variable(background, .3)};
+	border-top-color: #{color.no-variable(background)};
+	border-radius: .5em;
+	font-size: 1em;
+}
+
+// TODO(Bas): Overlay spinners

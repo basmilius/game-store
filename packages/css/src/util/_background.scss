@@ -1,0 +1,27 @@
+@use "sass:map";
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+$bgs: (
+	black: black,
+	white: white,
+	transparent: transparent
+);
+
+@each $color in map.keys(config.$colors)
+{
+	$bgs: map.merge($bgs, (
+		$color: color-no-variable($color)
+	));
+}
+
+$-background-utilities: (
+	(
+		property: background-color,
+		class: bg,
+		values: $bgs
+	)
+);
+
+@include utility-make-utilities($-background-utilities, false);

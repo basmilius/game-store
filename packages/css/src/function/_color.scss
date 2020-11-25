@@ -1,0 +1,54 @@
+@function compose-variable($name, $withLightness: false)
+{
+	@if $withLightness == false
+	{
+		@return var(--#{$name}), var(--#{$name}-l);
+	} @else if($withLightness == true)
+	{
+		@return var(--#{$name}), calc(var(--#{$name}-l) + var(--l, 0%));
+	} @else
+	{
+		@return var(--#{$name}), calc(var(--#{$name}-l) + #{$withLightness});
+	}
+}
+
+@function compose-variable-on($name, $withLightness: false)
+{
+	@if $withLightness == false
+	{
+		@return var(--#{$name}-on), var(--#{$name}-on-l);
+	} @else if($withLightness == true)
+	{
+		@return var(--#{$name}-on), calc(var(--#{$name}-on-l) + var(--l, 0%));
+	} @else
+	{
+		@return var(--#{$name}-on), calc(var(--#{$name}-on-l) + #{$withLightness});
+	}
+}
+
+@function no-variable($name, $alpha: 1)
+{
+	@if $alpha == 1
+	{
+		@return hsl(var(--#{$name}), var(--#{$name}-l));
+	} @else
+	{
+		@return hsla(var(--#{$name}), var(--#{$name}-l), #{$alpha});
+	}
+}
+
+@function no-variable-on($name, $alpha: 1)
+{
+	@if $alpha == 1
+	{
+		@return hsl(var(--#{$name}-on), var(--#{$name}-on-l));
+	} @else
+	{
+		@return hsla(var(--#{$name}-on), var(--#{$name}-on-l), #{$alpha});
+	}
+}
+
+@function layered($base, $color, $alpha: 1)
+{
+	@return #{no-variable($base)} linear-gradient(to top, #{no-variable($color, $alpha)}, #{no-variable($color, $alpha)});
+}

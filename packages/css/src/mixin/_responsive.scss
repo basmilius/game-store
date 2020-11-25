@@ -1,0 +1,68 @@
+@use "../config";
+@use "../function" as *;
+
+@mixin down($name)
+{
+	$max: responsive-maxWidth($name);
+
+	@if $max
+	{
+		@media (max-width: $max)
+		{
+			@content;
+		}
+	} @else
+	{
+		@content;
+	}
+}
+
+@mixin up($name)
+{
+	$min: responsive-minWidth($name);
+
+	@if $min
+	{
+		@media (min-width: $min)
+		{
+			@content;
+		}
+	} @else
+	{
+		@content;
+	}
+}
+
+@mixin between($lower, $upper)
+{
+	$min: responsive-minWidth($lower);
+	$max: responsive-maxWidth($upper);
+
+	@if $min != null and $max != null
+	{
+		@media (min-width: $min) and (max-width: $max)
+		{
+			@content;
+		}
+	} @else if $max == null
+	{
+		@include up($lower)
+		{
+			@content;
+		}
+	} @else if $min == null
+	{
+		@include down($upper)
+		{
+			@content;
+		}
+	}
+}
+
+@mixin only($name)
+{
+	@include between($name, $name)
+	{
+		@content;
+	}
+}

@@ -1,0 +1,111 @@
+@use "../mixin" as *;
+
+$-layout-utilities: (
+	(
+		property: overflow,
+		class: overflow,
+		values: auto hidden visible
+	),
+	(
+		property: position,
+		class: position,
+		values: static relative absolute fixed sticky
+	),
+	(
+		property: visibility,
+		class: visibility,
+		values: visible hidden
+	),
+	(
+		property: height,
+		class: h,
+		values: (
+			25: 25%,
+			50: 50%,
+			75: 75%,
+			100: 100%,
+			auto: auto
+		)
+	),
+	(
+		property: max-height,
+		class: max-h,
+		values: (
+			25: 25%,
+			50: 50%,
+			75: 75%,
+			100: 100%
+		)
+	),
+	(
+		property: min-height,
+		class: min-h,
+		values: (
+			25: 25%,
+			50: 50%,
+			75: 75%,
+			100: 100%
+		)
+	),
+	(
+		property: width,
+		class: w,
+		values: (
+			25: 25%,
+			50: 50%,
+			75: 75%,
+			100: 100%,
+			auto: auto
+		)
+	),
+	(
+		property: max-width,
+		class: max-w,
+		values: (
+			25: 25%,
+			50: 50%,
+			75: 75%,
+			100: 100%
+		)
+	),
+	(
+		property: min-width,
+		class: min-w,
+		values: (
+			25: 25%,
+			50: 50%,
+			75: 75%,
+			100: 100%
+		)
+	),
+	(
+		property: opacity,
+		class: opacity,
+		values: (
+			0: 0,
+			25: .25,
+			50: .50,
+			75: .75,
+			100: 1
+		)
+	),
+	(
+		property: user-select,
+		class: user-select,
+		values: (
+			null: unset,
+			none: none
+		)
+	)
+);
+
+$-layout-utilities-responsive: (
+	(
+		property: display,
+		class: d,
+		values: none inline inline-block block table table-row table-cell flex inline-flex
+	)
+);
+
+@include utility-make-utilities($-layout-utilities, false);
+@include utility-make-utilities($-layout-utilities-responsive);

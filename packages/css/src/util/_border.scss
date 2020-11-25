@@ -1,0 +1,49 @@
+@use "../function" as *;
+@use "../mixin" as *;
+
+$-border-color: color-no-variable(outline);
+
+$-flex-utilities: (
+	(
+		property: border,
+		class: border,
+		values: (
+			null: unquote("1px solid #{$-border-color}"),
+			0: 0
+		)
+	),
+	(
+		property: border-top,
+		class: border-top,
+		values: (
+			null: unquote("1px solid #{$-border-color}"),
+			0: 0
+		)
+	),
+	(
+		property: border-left,
+		class: border-left,
+		values: (
+			null: unquote("1px solid #{$-border-color}"),
+			0: 0
+		)
+	),
+	(
+		property: border-right,
+		class: border-right,
+		values: (
+			null: unquote("1px solid #{$-border-color}"),
+			0: 0
+		)
+	),
+	(
+		property: border-bottom,
+		class: border-bottom,
+		values: (
+			null: unquote("1px solid #{$-border-color}"),
+			0: 0
+		)
+	)
+);
+
+@include utility-make-utilities($-flex-utilities);

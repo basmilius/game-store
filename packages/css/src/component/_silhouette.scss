@@ -1,0 +1,68 @@
+@use "../config";
+@use "../function" as *;
+
+@keyframes silhouette
+{
+	from { background: #{color-no-variable(outline, .75)}; }
+	to { background: #{color-no-variable(outline, .25)}; }
+}
+
+%silhouette
+{
+	display: block;
+	pointer-events: none;
+	animation: silhouette 1s infinite alternate var(--standardCurve);
+}
+
+h1.silhouette,
+h2.silhouette,
+h3.silhouette,
+h4.silhouette,
+h5.silhouette,
+h6.silhouette
+{
+	@extend %silhouette;
+
+	height: 1em;
+	border-radius: #{config.$radius};
+}
+
+.avatar.silhouette,
+#{config.$icon-selector}.silhouette
+{
+	@extend %silhouette;
+}
+
+p.silhouette
+{
+	&::before,
+	&::after
+	{
+		@extend %silhouette;
+
+		height: .8em;
+		margin: .4em 0;
+		border-radius: #{config.$radius / 2};
+		content: "";
+	}
+
+	&::before
+	{
+		width: 100%;
+	}
+
+	&::after
+	{
+		margin-top: .6em;
+		width: 70%;
+	}
+}
+
+span.silhouette
+{
+	@extend %silhouette;
+
+	height: 1em;
+	flex-grow: 1;
+	border-radius: #{config.$radius / 2};
+}

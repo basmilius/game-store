@@ -1,0 +1,36 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+%-container
+{
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: gutter-get(4);
+	padding-right: gutter-get(4);
+	width: 100%;
+
+	&.no-gutter
+	{
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.container
+{
+	@extend %-container;
+
+	&-fluid
+	{
+		@extend %-container;
+	}
+
+	@each $breakpoint, $maxWidth in config.$container-widths
+	{
+		@include responsive-up($breakpoint)
+		{
+			max-width: $maxWidth;
+		}
+	}
+}

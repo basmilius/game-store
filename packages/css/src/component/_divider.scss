@@ -1,0 +1,19 @@
+@use "../function" as *;
+
+.divider
+{
+	flex: 0 0 1px;
+	background: #{color-no-variable(outline)};
+
+	&-horizontal
+	{
+		height: 1px;
+		margin: #{gutter-get(2)} 0;
+	}
+
+	&-vertical
+	{
+		margin: 0 #{gutter-get(2)};
+		width: 1px;
+	}
+}

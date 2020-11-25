@@ -1,0 +1,84 @@
+@use "sass:map";
+
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+$-colors: (
+	black: black,
+	white: white,
+	muted: color-no-variable-on(base-light, .6)
+);
+
+@each $color in map.keys(config.$colors)
+{
+	$-colors: map.merge($-colors, (
+		$color: color-no-variable($color)
+	));
+}
+
+$-text-utilities: (
+	(
+		property: color,
+		class: text,
+		values: $-colors
+	),
+	(
+		property: font-family,
+		class: ff,
+		values: (
+			sans: #{config.$font-family},
+			serif: #{config.$font-family-serif},
+			monospace: #{config.$font-family-monospace}
+		)
+	),
+	(
+		property: font-style,
+		class: fs,
+		values: normal italic oblique
+	),
+	(
+		property: font-size line-height,
+		class: text,
+		values: (
+			small: .85rem 1.3rem,
+			large: 1.1rem 1.7rem
+		)
+	),
+	(
+		property: font-weight,
+		class: fw,
+		values: (
+			100: 100,
+			200: 200,
+			300: 300,
+			400: 400,
+			500: 500,
+			600: 600,
+			700: 700,
+			800: 800,
+			900: 900
+		)
+	),
+	(
+		property: text-transform,
+		class: text,
+		values: capitalize lowercase uppercase
+	),
+	(
+		property: white-space,
+		class: text,
+		values: (wrap: normal, nowrap: nowrap)
+	)
+);
+
+$-text-utilities-responsive: (
+	(
+		property: text-align,
+		class: text,
+		values: left center right justify
+	)
+);
+
+@include utility-make-utilities($-text-utilities, false);
+@include utility-make-utilities($-text-utilities-responsive);

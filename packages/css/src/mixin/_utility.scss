@@ -1,0 +1,87 @@
+@use "sass:map";
+@use "../config";
+@use "../function" as *;
+@use "responsive";
+
+@mixin make-utilities($utilities, $responsive: true)
+{
+	@if type-of($utilities) != "list"
+	{
+		$utilities: ($utilities,);
+	}
+
+	@if $responsive == true
+	{
+
+		@each $breakpoint in map-keys(config.$breakpoints)
+		{
+			@include responsive.up($breakpoint)
+			{
+				@each $utility in $utilities
+				{
+					@include make-utility($utility, $breakpoint);
+				}
+			}
+		}
+
+	} @else
+	{
+
+		@each $utility in $utilities
+		{
+			@include make-utility($utility);
+		}
+
+	}
+}
+
+@mixin make-utility($utility, $prefix: null)
+{
+	@if type-of($utility) != "map"
+	{
+		@error "makeUtility() $utility must be a map, got '#{$utility}'.";
+	}
+
+	$class: map.get($utility, class);
+	$properties: map.get($utility, property);
+	$values: map.get($utility, values);
+
+	@if type-of($values) == "string" or type-of(nth($values, 1)) != "list"
+	{
+		$values: zip($values, $values);
+	}
+
+	@if type-of($properties) == "string"
+	{
+		$properties: append((), $properties);
+	}
+
+	@each $key, $value in $values
+	{
+		$className: if($key != null, #{$class}-#{$key}, #{$class});
+		$className: if($prefix != null, responsive-prefix($prefix, #{$className}), #{$className});
+
+		@if type-of($value) == "list"
+		{
+			.#{$className}
+			{
+				$i: 1;
+
+				@each $property in $properties
+				{
+					#{$property}: #{nth($value, $i)} !important;
+					$i: $i + 1;
+				}
+			}
+		} @else
+		{
+			.#{$className}
+			{
+				@each $property in $properties
+				{
+					#{$property}: #{$value} !important;
+				}
+			}
+		}
+	}
+}

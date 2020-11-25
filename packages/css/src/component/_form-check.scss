@@ -1,0 +1,39 @@
+@use "../config";
+@use "../function" as *;
+@use "../mixin" as *;
+
+.form-check
+{
+	@include form-base-form-element;
+	@include form-base-form-toggle;
+
+	height: 24px;
+	width: 24px;
+	border-radius: #{config.$radius};
+
+	&::before
+	{
+		height: 100%;
+		width: 100%;
+		background: transparent;
+		mask: url(~@latte-ui/css/src/image/check-icon.svg) no-repeat center center / 18px;
+		transition-property: background;
+	}
+
+	&:indeterminate::before
+	{
+		mask: url(~@latte-ui/css/src/image/check-icon-indeterminate.svg) no-repeat center center / 18px;
+	}
+
+	&:checked,
+	&:indeterminate
+	{
+		background: #{color-no-variable(background)};
+		border-color: #{color-no-variable(background)};
+
+		&::before
+		{
+			background: #{color-no-variable(color)};
+		}
+	}
+}

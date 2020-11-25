@@ -1,0 +1,153 @@
+@use "../config";
+@use "../function" as *;
+
+.last-bottom-margin:not(:last-child)
+{
+	margin-bottom: 1rem;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6
+{
+	display: block;
+	margin: 0 0 #{gutter-get(2)} 0;
+	font-weight: 700;
+	line-height: 1.5em;
+
+	&:not(:first-child)
+	{
+		margin-top: #{gutter-get(6)};
+	}
+}
+
+h1, .h1
+{
+	font-size: 2rem;
+}
+
+h2, .h2
+{
+	font-size: 1.8rem;
+}
+
+h3, .h3
+{
+	font-size: 1.6rem;
+}
+
+h4, .h4
+{
+	font-size: 1.4rem;
+}
+
+h5, .h5
+{
+	font-size: 1.2rem;
+}
+
+h6, .h6
+{
+	font-size: 1.0rem;
+}
+
+a
+{
+	color: #{color-no-variable(primary)};
+	text-decoration: underline #{color-no-variable(outline)};
+	transition: text-decoration-color 120ms var(--swiftOut);
+
+	&:hover
+	{
+		text-decoration-color: currentColor;
+	}
+}
+
+p
+{
+	margin-bottom: 1rem;
+
+	&.lead
+	{
+		font-size: 1.1rem;
+	}
+
+	&:last-child
+	{
+		margin-bottom: 0;
+	}
+}
+
+blockquote
+{
+	margin-bottom: 1rem;
+	padding: #{gutter-get(4)} #{gutter-get(5)};
+	background: #{color-no-variable(outline, .25)};
+	border-left: 3px solid #{color-no-variable(outline)};
+
+	> blockquote
+	{
+		padding-top: #{gutter-get(1)};
+		padding-bottom: #{gutter-get(1)};
+		background: transparent;
+	}
+}
+
+code,
+pre
+{
+	background: #{color-no-variable(outline, .25)};
+	border-radius: #{config.$radius};
+	font-family: #{config.$font-family-monospace};
+}
+
+pre
+{
+	padding: #{gutter-get(3)} #{gutter-get(5)};
+	overflow: auto;
+}
+
+pre code
+{
+	background: unset;
+}
+
+dl
+{
+	margin-bottom: 1rem;
+
+	&:last-child
+	{
+		margin-bottom: 0;
+	}
+
+	dt
+	{
+		font-weight: 700;
+	}
+
+	dd
+	{
+		margin-left: 2rem;
+	}
+}
+
+img.emoji
+{
+	height: 1.3em;
+	width: 1.3em;
+	display: inline-block;
+	margin: -.15em .1em .15em;
+	line-height: normal;
+	vertical-align: middle;
+	-webkit-user-drag: none;
+}
+
+img:not([height]).is-fluid
+{
+	height: unset;
+	max-width: 100%;
+}

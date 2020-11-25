@@ -1,0 +1,91 @@
+@use "../mixin" as *;
+
+$-flex-utilities: (
+	(
+		property: flex,
+		class: flex,
+		values: (
+			fill: 1 1 0
+		)
+	),
+	(
+		property: flex-direction,
+		class: flex,
+		values: column column-reverse row row-reverse
+	),
+	(
+		property: flex-grow,
+		class: flex,
+		values: (
+			grow-0: 0,
+			grow: 1
+		)
+	),
+	(
+		property: flex-shrink,
+		class: flex,
+		values: (
+			shrink-0: 0,
+			shrink: 1
+		)
+	),
+	(
+		property: flex-wrap,
+		class: flex,
+		values: wrap nowrap wrap-reverse
+	),
+	(
+		property: justify-content,
+		class: justify-content,
+		values: (
+			start: flex-start,
+			end: flex-end,
+			center: center,
+			between: space-between,
+			around: space-around
+		)
+	),
+	(
+		property: align-content,
+		class: align-content,
+		values: (
+			start: flex-start,
+			end: flex-end,
+			center: center,
+			between: space-between,
+			around: space-around,
+			stretch: stretch
+		)
+	),
+	(
+		property: align-items,
+		class: align-items,
+		values: (
+			start: flex-start,
+			end: flex-end,
+			center: center,
+			between: space-between,
+			around: space-around,
+			stretch: stretch
+		)
+	),
+	(
+		property: align-self,
+		class: align-self,
+		values: (
+			start: flex-start,
+			end: flex-end,
+			center: center,
+			between: space-between,
+			around: space-around,
+			stretch: stretch
+		)
+	),
+	(
+		property: order,
+		class: order,
+		values: 0 1 2 3 4 5 6
+	)
+);
+
+@include utility-make-utilities($-flex-utilities);

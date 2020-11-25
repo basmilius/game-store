@@ -1,0 +1,19 @@
+@use "~@latte-ui/css" as *;
+
+.gs-logo
+{
+	color: #{color-no-variable(base-dark)};
+	font-size: 27px;
+	text-decoration: none;
+
+	&-game
+	{
+		font-weight: 300;
+	}
+
+	&-store
+	{
+		color: #{color-no-variable(primary)};
+		font-weight: 700;
+	}
+}

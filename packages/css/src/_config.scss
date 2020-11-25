@@ -1,0 +1,93 @@
+@use "sass:map";
+
+/* Toggles */
+$enable-focus-state: true !default;
+$enable-hover-focus-active: true !default;
+
+/* General */
+$dark-mode: auto !default;
+$elevation-levels: (0, 1, 2, 3, 4, 6, 8, 12, 16, 24) !default;
+$icon-selector: unquote(".mdi");
+$radius: 6px;
+
+/* Colors */
+$body-bg: #eef2f7;
+$body-color: #191a1c;
+$body-dark-bg: #000000;
+$body-dark-color: #b6b6b7;
+
+$colors: (
+	base-dark: (#191a1c, white),
+	base-light: (white, #191a1c),
+	dark: (#191a1c, white),
+	light: (white, #191a1c),
+	outline: (#dbe2ea, #191a1c),
+	primary: (#1089ff, white),
+	error: (#f50008, white),
+	info: (#007bc8, white),
+	success: (#00885c, white),
+	warning: (#fba700, white)
+) !default;
+
+$colors-dark: map.merge($colors, (
+	dark: (white, #191a1c),
+	light: (#191a1c, white),
+	outline: (#3d3e46, #dbe2ea),
+	primary: (#1089ff, #191a1c),
+	error: (#f50008, #191a1c),
+	info: (#007bc8, #191a1c),
+	success: (#00885c, #191a1c),
+	warning: (#fba700, #191a1c)
+)) !default;
+
+$shadow-color: #3d3e46 !default;
+$shadow-color-dark: #000000 !default;
+
+/* Easing Functions */
+$easing-functions: (
+	accelerationCurve: cubic-bezier(.4, .0, 1, 1),
+	decelerationCurve: cubic-bezier(.0, .0, .2, 1),
+	sharpCurve: cubic-bezier(.4, .0, .6, 1),
+	standardCurve: cubic-bezier(.4, .0, .2, 1),
+	swiftOut: cubic-bezier(.55, 0, .1, 1)
+) !default;
+
+/* Font & Text */
+$font-family: sans-serif !default;
+$font-family-monospace: monospace !default;
+$font-family-serif: serif !default;
+
+/* Grid */
+$breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px
+) !default;
+
+$columns: 12 !default;
+
+$container-widths: (
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: 1140px
+) !default;
+
+/* Gutters */
+$gutters: (
+	0: 0,
+	1px: 1px,
+	1\/2: 3px,
+	1: 6px,
+	2: 9px,
+	3: 12px,
+	4: 15px,
+	5: 18px,
+	6: 24px,
+	7: 30px,
+	8: 36px,
+	9: 48px,
+	10: 60px
+) !default;
